@@ -28,6 +28,8 @@ static u8g2_esp32_hal_t u8g2_esp32_hal;  // HAL state data.
     }                                        \
   } while (0);
 
+
+
 /*
  * Initialze the ESP32 HAL.
  */
@@ -67,7 +69,7 @@ uint8_t u8g2_esp32_spi_byte_cb(u8x8_t* u8x8,
       bus_config.quadwp_io_num = GPIO_NUM_NC;                // Not used
       bus_config.quadhd_io_num = GPIO_NUM_NC;                // Not used
       // ESP_LOGI(TAG, "... Initializing bus.");
-      ESP_ERROR_CHECK(spi_bus_initialize(HOST, &bus_config, 1));
+      ESP_ERROR_CHECK(spi_bus_initialize(HOST, &bus_config, SPI_DMA_CH_AUTO));
 
       spi_device_interface_config_t dev_config;
       dev_config.address_bits = 0;
@@ -77,7 +79,7 @@ uint8_t u8g2_esp32_spi_byte_cb(u8x8_t* u8x8,
       dev_config.duty_cycle_pos = 0;
       dev_config.cs_ena_posttrans = 0;
       dev_config.cs_ena_pretrans = 0;
-      dev_config.clock_speed_hz = 10000;
+      dev_config.clock_speed_hz = 1000000;
       dev_config.spics_io_num = u8g2_esp32_hal.bus.spi.cs;
       dev_config.flags = 0;
       dev_config.queue_size = 200;

@@ -36,6 +36,8 @@ typedef struct {
   union {
     /* SPI settings. */
     struct {
+      /* SPI Bus num. */
+      spi_host_device_t bus;
       /* GPIO num for clock. */
       gpio_num_t clk;
       /* GPIO num for SPI mosi. */
@@ -68,6 +70,10 @@ typedef struct {
     .reset = U8G2_ESP32_HAL_UNDEFINED, .dc = U8G2_ESP32_HAL_UNDEFINED \
   }
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * Initialize the HAL with the given configuration.
  *
@@ -88,5 +94,10 @@ uint8_t u8g2_esp32_gpio_and_delay_cb(u8x8_t* u8x8,
                                      uint8_t arg_int,
                                      void* arg_ptr);
 #endif /* U8G2_ESP32_HAL_H_ */
+
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
